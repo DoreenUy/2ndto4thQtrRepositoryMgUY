@@ -1,6 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>Sign-up Page</title>
     </head>
+    <body>
+        <form method="post" action="submit" 
+        onsubmit="return confirm('Are you sure you would like to submit the form?');"
+        onreset="return confirm('Are you sure you would like to reset the form?');"
+        >
+            <p>
+                <label for="studentid">StudentID:</label>
+                <input type="number" id="studentid" name="studentid">
+                <br> <br>
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name">
+                <br> <br>
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday>">
+                <br> <br>
+                <label for="email">Email address:</label>
+                <input type="email" id="email" name="email">
+                <br> <br>
+                <label for="mobilephone">Mobile Phone:</label>
+                <input type="text" id="mobilephone" name="mobilephone">
+                <br> <br>
+                <label for="gradelevel">Grade Level:</label>
+                <select name="gradelevel" id="gradelevel">
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                </select>
+                <br> <br>
+                <p>Intern/Extern:</p>
+                <input type="radio" id="intern" name="option" value="intern">
+                <label for="intern">Intern</label>
+                <input type="radio" id="extern" name="option" value="extern">
+                <label for="extern">Extern</label>
+                <br> <br>
+                <label for="club">Club:</label>
+                <select name="club" id="club">
+                    <option value="Alianti">Alianti</option>
+                    <option value="Volant">Volant</option>
+                    <option value="MUN">MUN</option>
+                    <option value="Flux">Flux</option>
+                    <option value="Care">Care</option>
+                </select>
+                <br> <br>
+                <label for="reason">Why do you want to join?:</label>
+                <br> <br>
+                <textarea id="tArea" name="reason" rows="10" cols="50"> </textarea>
+                <br> <br>
+                <input type = 'submit' value="submit">
+                <input type = "reset" value = "Reset">
+            </p>
+        </form>
+    </body>
 </html>
