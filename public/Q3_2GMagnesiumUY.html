@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        body{
+        padding: 25px;
+        font-family: arial;
+        }
+        .title {
+            color: #ab1919;
+        }
+
+        p {
+            color: rgb(105, 81, 212);
+        }
+
+        label {
+            color: #cd0dbd;
+        }
+    </style>
     <head>
         <title>Sign-up Page</title>
     </head>
+     <nav>
+            <a href="viewSignUps.html"> Saved Accounts </a>
+        </nav>
     <body>
-        <form method="post" action="submit" 
+        <form
         onsubmit="return confirm('Are you sure you would like to submit the form?');"
         onreset="return confirm('Are you sure you would like to reset the form?');"
         >
