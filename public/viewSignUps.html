@@ -2,15 +2,100 @@
 <html lang="en">
   <head>
     <style>
-
+      body{
+        padding: 25px;
+        font-family: arial;
+        width: 80%;
+        margin-left: 10%;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      table, th, td {
+        border: 1px solid rgb(192, 47, 47);
+        padding: 5px;
+      }
     </style>
         <nav>
             <a href="Q3_2GMagnesiumUY.html"> HTML Form </a>
         </nav>
   </head>
   <body>
+    <h2 class="title">Show List of Students Who Signed-Up</h2>
+
+    <label for="club">Select Your Club</label>
+    <select id="club">
+      <option value="ALL">All Clubs</option>
+      <option value="Alianti">Alianti</option>
+      <option value="Volant">Volant</option>
+      <option value="MUN">MUN</option>
+      <option value="Flux">Flux</option>
+      <option value="Care">Care</option>
+    </select>
+
+    <p id="total">Total Sign-up: 0</p>
+    <table id="results"></table>
+
     <script>
-    
+    const results = document.getElementById("results");
+    const club = document.getElementById("club");
+    const total = document.getElementById("total");
+
+    function renderTable(saved, ans = "ALL") {
+
+    const header =
+        "<tr>" +
+        "<th>Club</th>" +
+        "<th>Student ID</th>" +
+        "<th>Name</th>" +
+        "<th>Grade</th>" +
+        "<th>Email</th>" +
+        "<th>Phone</th>" +
+        "<th>Intern/Extern</th>" +
+        "</tr>";
+
+        let rows = "";
+        let count = 0;
+
+        if (!saved || saved.length === 0) {
+          results.innerHTML = header + "<tr><td colspan='7'>No sign-ups saved</td></tr>";
+          total.textContent = "Total Sign-up: 0";
+          return;
+        }
+
+        for (let i = 0; i < saved.length; i++) {
+          let signup = saved[i];
+
+          if (ans === "ALL" || signup.club === ans) {
+            rows += "<tr>";
+            rows += "<td>" + signup.club + "</td>";
+            rows += "<td>" + signup.studentID + "</td>";
+            rows += "<td>" + signup.name + "</td>";
+            rows += "<td>" + signup.gradelevel + "</td>";
+            rows += "<td>" + signup.email + "</td>";
+            rows += "<td>" + signup.mobilephone + "</td>";
+            rows += "<td>" + signup.option + "</td>";
+            rows += "</tr>";
+            count++;
+          }
+        }
+
+        if (count === 0) {
+          rows = "<tr><td colspan='7'>No Sign Ups for the Club</td></tr>";
+        }
+
+        results.innerHTML = header + rows;
+        total.textContent = "Total sign-ups: " + count;
+    }
+
+    let saved = JSON.parse(localStorage.getItem("savedsignups"));
+    renderTable(saved, "ALL");
+
+    club.addEventListener("change", function () {
+    renderTable(saved, this.value);
+
+  });
     </script>
   </body>
 </html>
