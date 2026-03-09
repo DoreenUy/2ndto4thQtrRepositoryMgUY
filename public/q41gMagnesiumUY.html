@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body{
+        padding: 25px;
+        font-family: arial;
+        }
+        h1 {
+            color: #000000;
+            text-align: center;
+        }
+
+        p {
+            color: rgb(105, 81, 212);
+        }
+
+        label {
+            color: #cd0dbd;
+        }
+    </style>
+    <head>
+        <h1>Add a Movie</h1>
+    </head>
+    <body>
+        <form id="signupform"
+        onreset="return confirm('Are you sure you would like to reset the form?');"
+        >
+            <p> 
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+                <br> <br>
+
+                <label for="year">Year:</label>
+                <input type="text" id="year" name="year">
+                <br> <br>
+
+                <label for="genre">Genre:</label>
+                <select name="genre" id="genre">
+                    <option value="1">Action</option>
+                    <option value="2">Comedy</option>
+                    <option value="3">Horror</option>
+                    <option value="4">Romance</option>
+                    <option value="5">Fantasy</option>
+                </select>
+                <br> <br>
+
+                <p>Rating:</p>
+                <input type="radio" id="s1" name="option" value="s1">
+                <label for="s1">*</label>
+                <input type="radio" id="s2" name="option" value="s2">
+                <label for="s2">*</label>
+                <input type="radio" id="s3" name="option" value="s3">
+                <label for="s3">*</label>
+                <input type="radio" id="s4" name="option" value="s4">
+                <label for="s4">*</label>
+                <input type="radio" id="s5" name="option" value="s5">
+                <label for="s5">*</label>
+                <br> <br>
+                
+                <input type = 'submit' value="submit">
+                <input type = "reset" value = "Reset">
+            </p>
+        </form>
+        <script>
+        </script>
+    </body>
+</html>
