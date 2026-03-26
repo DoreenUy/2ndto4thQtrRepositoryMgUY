@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body{
+        padding: 25px;
+        font-family: arial;
+        }
+        h1 {
+            color: #000000;
+            text-align: center;
+        }
+
+        p {
+            color: rgb(105, 81, 212);
+        }
+
+        label {
+            color: #cd0dbd;
+        }
+
+        #movielist div { 
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #000;
+            border: 1px solid #ff00e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffee00;
+        }
+    </style>
+    <head>
+        <h1>Add a Movie</h1>
+    </head>
+    <body>
+        <form id="movies">
+            <p> 
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                <br> <br>
+
+                <label for="year">Year:</label>
+                <input type="text" id="year" name="year" required>
+                <br> <br>
+
+                <label for="genre">Genre:</label>
+                <select name="genre" id="genre" required>
+                    <option value="1">Action</option>
+                    <option value="2">Comedy</option>
+                    <option value="3">Horror</option>
+                    <option value="4">Romance</option>
+                    <option value="5">Fantasy</option>
+                </select>
+                <br> <br>
+
+                Rating<br>
+                    <input type="radio" id="star1" name="rating" value="star1">
+                    <input type="radio" id="star2" name="rating" value="star2">
+                    <input type="radio" id="star3" name="rating" value="star3">
+                    <input type="radio" id="star4" name="rating" value="star4">
+                    <input type="radio" id="star5" name="rating" value="star5">
+                    <br><br>
+                <input type="submit" value="Add Movie">
+            </p>
+        </form>
+
+        <h2>Movie List</h2>
+        <div id="movielist"></div>
+
+        <script>
+        const form = document.getElementById('movies');
+        const movielist = document.getElementById('movielist');
+
+        function getstars(rating) {
+            return '★'.repeat(rating);
+        }
+
+        function getratingvalue(ratingString) {
+            return parseInt(ratingString.replace('star', ''));
+        }
+
+        function showmovies() {
+            const movies = JSON.parse(localStorage.getItem('movies')) || [];
+            movielist.innerHTML = '';
+            movies.forEach((movie, index) => {
+                const div = document.createElement('div');
+                div.style.marginBottom = '10px';
+                div.innerHTML = `${movie.title} (${movie.year}) - ${movie.genre}, Rating: ${getstars(movie.rating)} 
+                <button type="button" data-index="${index}" style="margin-left: 10px;">Delete</button>`;
+                
+                const deletebutton = div.querySelector('button');
+                deletebutton.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to delete this movie?')) {
+                        movies.splice(index, 1);
+                        localStorage.setItem('movies', JSON.stringify(movies));
+                        showmovies();
+                    }
+                });
+                
+                movielist.appendChild(div);
+            });
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ratingvalue = getratingvalue(document.querySelector('input[name="rating"]:checked').value);
+            
+            const newmov = {
+                title: document.getElementById('title').value,
+                year: document.getElementById('year').value,
+                genre: document.getElementById('genre').value,
+                rating: ratingvalue
+            };
+            
+            const movies = JSON.parse(localStorage.getItem('movies')) || [];
+            const existingindex = movies.findIndex(m => m.title.toLowerCase() === newmov.title.toLowerCase());
+
+            if (existingindex !== -1) {
+                const oldrating = movies[existingindex].rating;
+                const newrating = newmov.rating;
+                const averagedrating = Math.round((oldrating + newrating) / 2);
+                
+                movies[existingindex] = {
+                    title: newmov.title,
+                    year: newmov.year,
+                    genre: newmov.genre,
+                    rating: averagedrating
+                };
+            } else {
+                movies.push(newmov);
+            }
+            
+            localStorage.setItem('movies', JSON.stringify(movies));
+            form.reset();
+            showmovies();
+        });
+
+        showmovies();
+        </script>
+    </body>
+</html>
